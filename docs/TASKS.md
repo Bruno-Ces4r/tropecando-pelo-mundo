@@ -4,13 +4,13 @@ Small, sequential slices. Each task should be shippable/testable on its own. Don
 until the previous one is done and reviewed.
 
 ## Phase 0 — Project Base
-- [ ] **0.1 Scaffold repo structure**
+- [x] **0.1 Scaffold repo structure**
   Acceptance: repo has `docs/` (project docs), an Eleventy project (source content + templates),
   `.gitignore`, `CLAUDE.md`, initial commit made.
-- [ ] **0.2 Eleventy base config + i18n skeleton**
+- [x] **0.2 Eleventy base config + i18n skeleton**
   Acceptance: `npm run build` produces a working `_site` with one page in PT and its EN
   equivalent, using the `/pt/...` and `/en/...` URL structure, sharing one template.
-- [ ] **0.3 GitHub Actions build+deploy workflow**
+- [x] **0.3 GitHub Actions build+deploy workflow**
   Acceptance: pushing to `main` automatically builds and publishes to GitHub Pages, no manual
   build step required.
 
