@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} · {{ site.name }}</title>
+    <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{{ i18n[lang].skipToContent }}</a>
+
+    <header class="site-header">
+      <a class="brand" href="{{ ('/' + lang + '/') | url }}">{{ site.name }}</a>
+      <nav class="lang-switch" aria-label="Language">
+        {# Link to the same page in the other language. `altLang` is set per page. #}
+        <a href="{{ ('/' + altLang + altPath) | url }}" rel="alternate" hreflang="{{ altLang }}">
+          {{ i18n[lang].switchTo }}
+        </a>
+      </nav>
+    </header>
+
+    <main id="main" class="site-main">
+      {{ content | safe }}
+    </main>
+
+    <footer class="site-footer">
+      <p>{{ i18n[lang].footerNote }}</p>
+    </footer>
+  </body>
+</html>

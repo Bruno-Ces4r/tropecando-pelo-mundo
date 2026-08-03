@@ -1,0 +1,18 @@
+---
+# Root page redirects visitors to the default language.
+permalink: /index.html
+layout: false
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="{{ site.defaultLanguage }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url={{ ('/' + site.defaultLanguage + '/') | url }}" />
+    <link rel="canonical" href="{{ ('/' + site.defaultLanguage + '/') | url }}" />
+    <title>{{ site.name }}</title>
+  </head>
+  <body>
+    <p><a href="{{ ('/' + site.defaultLanguage + '/') | url }}">{{ site.name }}</a></p>
+  </body>
+</html>

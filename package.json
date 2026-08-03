@@ -1,0 +1,20 @@
+{
+  "name": "guia-do-nomade",
+  "version": "1.0.0",
+  "description": "Guia do Nômade — companion site for the travel channel. Static, i18n (PT/EN), free to host.",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  },
+  "type": "module"
+}

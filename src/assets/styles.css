@@ -1,0 +1,95 @@
+/* Base skeleton styles only. Full visual identity ("Nômade Raiz" branding)
+   is Phase 2, task 2.1 — deliberately kept minimal and neutral here. */
+
+:root {
+  --ink: #1b2a2a;
+  --sea: #0f6466;
+  --sand: #f5f1e8;
+  --line: #d9d3c4;
+  --max: 46rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--sand);
+  line-height: 1.6;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: #fff;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--sea);
+}
+
+.site-header,
+.site-main,
+.site-footer {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--sea);
+}
+
+.lang-switch a {
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.site-main { padding-block: 2.5rem; }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  color: var(--sea);
+  margin: 0 0 0.25rem;
+}
+
+.hero h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+.tagline { font-size: 1.15rem; margin: 0 0 1rem; }
+.intro { color: #3a4a4a; }
+
+.placeholder {
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: #6a7373;
+}
+
+.site-footer {
+  padding-block: 2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: #6a7373;
+}
+
+a:focus-visible,
+.brand:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
