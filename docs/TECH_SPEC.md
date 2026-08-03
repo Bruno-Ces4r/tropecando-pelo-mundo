@@ -2,46 +2,54 @@
 
 ## Stack Decision
 
-**Choice: lightweight static site generator (Eleventy), hosted on GitHub Pages — revised from the
-original plain-HTML plan.**
+**Choice: Next.js (App Router, TypeScript) with static export, hosted on GitHub Pages — revised
+from the earlier Eleventy plan.**
 
-Tradeoff reconsidered: the original plan (plain HTML/CSS, no generator) worked for a single
-language, but i18n changes the math. Without a generator, adding a second language means every
-page exists twice (`joao-pessoa.html` + `joao-pessoa-en.html`), hand-kept in sync — every edit to
-shared layout, nav, or copy has to happen in both files, and that only gets worse as cities and
-languages are added. A generator lets each page's content live once (as data/content files) and
-render per-language automatically from shared templates.
+Decision history:
+1. Original idea brief: plain HTML/CSS.
+2. Revised to Eleventy once i18n became a requirement (avoid hand-duplicating pages per language).
+3. Revised again to **Next.js** once the project's goals changed to include serving as a
+   **portfolio piece** with room to grow (see PRD note). This is a deliberate trade: it's heavier
+   than the content strictly needs today, accepted in exchange for market reach (React/Next is the
+   most in-demand stack for the remote/international roles Bruno targets) and a growth path that
+   doesn't require a rewrite.
 
-Chose **Eleventy** specifically because: it's free, has no framework lock-in (outputs plain HTML),
-has straightforward built-in support for multi-language content structures, and keeps the "fast
-to ship, low complexity" spirit of the project — it's a templating/build step, not a full
-application framework. This does add one tool to learn and a build step (`npm run build` before
-deploy), which is a real cost against the "keep it dead simple" goal — but it's a smaller cost
-than hand-duplicating every page per language.
+Why Next.js specifically over other React options:
+- **Static export now, scale later without switching stacks.** `output: 'export'` produces a
+  fully static site (free on GitHub Pages, zero infra — meets the current constraint). If the
+  project later needs a backend, automated checkout, or a logged-in area, Next supports SSR and
+  API routes within the *same* framework — no migration.
+- **Mature i18n.** With App Router + static export, i18n is done via a dynamic `[lang]` segment
+  and `generateStaticParams`, with per-language dictionary files. Fully static, still PT/EN.
+- Chosen over Gatsby (maintenance uncertainty) and plain Vite/CRA (no first-class static-routing/
+  i18n story). Astro + React was the lighter alternative but carries less portfolio signal for
+  React-focused roles, which is now an explicit goal.
 
-**Revisit this decision if** the build step becomes a bigger blocker than expected in practice —
-in that case, falling back to plain HTML with a minimal include-based templating trick (just for
-the nav/header) is still an option.
+Cost acknowledged: heavier build and a JS runtime shipped to the client vs. the zero-JS Eleventy
+output. Accepted given the revised goals. **Revisit if** the portfolio/growth goal is dropped —
+in that case the previous Eleventy setup (preserved in git history) is the simpler fit.
 
 ## Hosting
-- GitHub Pages, free tier. Eleventy builds the site into an output folder (e.g. `_site`); that
-  built output — not the source — is what gets deployed. A simple GitHub Actions workflow (free
-  for public repos) can build and publish on every push, so Bruno never has to build locally.
-- The project-documentation `docs/` folder and Eleventy's build output are already separate
-  (`docs/` = source docs, `_site/` = build output), so the earlier naming collision concern is
-  resolved by this stack choice.
-- No custom domain required for v1 (default `username.github.io/repo-name` is fine); custom
-  domain is a possible later addition, still free via GitHub Pages if Bruno already owns a domain.
+- GitHub Pages, free tier. Next.js static export writes the site to `out/`; that built output —
+  not the source — is deployed. A GitHub Actions workflow (free for public repos) builds and
+  publishes on every push, so Bruno never has to build locally.
+- Project sites are served from `/<repo>/`, so `basePath`/`assetPrefix` are set to the repo name
+  in `next.config`. Images use `unoptimized: true` (required for static export — no image server).
+- The project-documentation `docs/` folder and the build output (`out/`) are separate, so there's
+  no naming collision.
+- No custom domain required for v1 (default `username.github.io/repo-name` is fine).
 
 ## Internationalization (i18n)
 - PT-BR is the default language; EN is the second language for v1.
-- Content (per city/country/page) lives once, in language-specific content files (e.g.
-  `content/pt/joao-pessoa.md` + `content/en/joao-pessoa.md`) that share the same template — so
-  layout, nav, and styling changes only happen once, in the template.
-- URL structure: language prefix (e.g. `/pt/brasil/joao-pessoa/`, `/en/brasil/joao-pessoa/`),
-  which is Eleventy's standard approach and keeps things crawlable/shareable per language.
-- A small language-switch link/toggle appears on every page, linking to the equivalent page in
-  the other language.
+- Implemented with App Router: a dynamic `app/[lang]/` segment plus `generateStaticParams()`
+  returning `pt` and `en`, so both language trees are pre-rendered at build time (fully static).
+- Copy lives once per language in dictionary files (`dictionaries/pt.json`, `dictionaries/en.json`),
+  loaded by a small `getDictionary(lang)` helper and passed into shared components — so layout,
+  nav, and styling changes happen once, in the components.
+- URL structure: language prefix (`/pt/...`, `/en/...`). The root path `/` redirects to the
+  default language (client-side meta refresh, since static export has no server redirects).
+- A small language-switch link appears on every page, linking to the equivalent page in the other
+  language.
 - PDF guides are not translated in v1 — the EN version of a city page can note the guide is
   Portuguese-only, or simply not show the purchase block.
 

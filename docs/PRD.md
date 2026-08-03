@@ -17,9 +17,13 @@ There's no lightweight, low-effort way to package it into something the audience
 - No user accounts, login, or audience database.
 - No automated payment→delivery pipeline (manual fulfillment is acceptable at current volume).
 - No dedicated landing pages for mentorship — just CTA blocks linking to email.
-- Not a technical portfolio piece — simplicity and shipping speed beat engineering polish here
-  (that role belongs to the separate "Garimpo" project).
 - No CMS — content is added by directly editing files (low volume, single author).
+
+Note (updated): this project **now also serves as a portfolio piece** and is intended to grow.
+That's a deliberate change from the original idea brief, which framed it as a throwaway-simple
+companion project. Simplicity and shipping speed still matter, but the stack choice now also
+weighs market reach and room to grow (see TECH_SPEC). It does not replace the separate "Garimpo"
+project as the primary engineering showcase — the two now both carry some portfolio weight.
 
 ## Target User
 Bruno's own audience: people following the YouTube/Instagram/TikTok content, interested in

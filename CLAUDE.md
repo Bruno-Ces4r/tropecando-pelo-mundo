@@ -15,32 +15,44 @@ don't silently diverge from them.
 - **Propose before large changes.** For anything beyond a small, contained edit — new dependencies,
   structural changes, changing the stack, reworking multiple files — describe the approach and wait
   for an OK before implementing.
-- **Respect the non-goals.** This is a deliberately lightweight companion project, not an
-  engineering showcase (that role belongs to a separate project). Prefer simplicity and speed of
-  shipping over sophistication. Everything must stay free to run.
+- **Portfolio + growth is now an explicit goal** (see PRD note), alongside staying free to run.
+  This project uses Next.js on purpose — heavier than the content strictly needs — as a deliberate
+  trade for market reach and room to grow into SSR/API routes later without a rewrite. Don't use
+  this as license to add complexity beyond what a task actually calls for.
 
 ## Conventions
 - **Content/copy:** Portuguese (PT-BR is the default language; EN is the second).
 - **Code, comments, docs:** English.
-- **i18n:** page content lives once per language under `src/pt/` and `src/en/`, sharing templates
-  in `src/_includes/`. Shared UI strings live in `src/_data/i18n.js`. Add a new language by adding
-  it to `src/_data/site.js` and creating the matching `src/<code>/` folder.
+- **i18n:** App Router with a dynamic `app/[lang]/` segment (see `lib/i18n.ts` for the locale
+  list). Copy lives once per language in `dictionaries/<locale>.json`, loaded via
+  `lib/dictionaries.ts`. Add a new language by adding it to `lib/i18n.ts` and creating the
+  matching dictionary file.
+- **Static export only.** `next.config.mjs` sets `output: 'export'` — avoid APIs that require a
+  Node server (route handlers doing server-side work, `next/image` optimization, etc.) unless
+  we've explicitly decided to move off static export.
 
 ## Project layout
 ```
 docs/                 project documentation (source of truth)
-src/                  Eleventy source
-  _data/              site.js (config), i18n.js (UI strings)
-  _includes/          shared templates (base.njk)
-  pt/  en/            per-language pages
-  assets/             css and static files
-eleventy.config.js    build config (src -> _site)
-.github/workflows/    build + deploy to GitHub Pages
+app/
+  layout.tsx           root layout (html/body)
+  page.tsx             redirects "/" to the default locale
+  [lang]/
+    layout.tsx          per-locale layout: header, footer, language switch
+    page.tsx             home page
+  globals.css           base styles
+lib/                   i18n config + dictionary loader
+dictionaries/          pt.json, en.json — UI copy per language
+public/                static files (includes .nojekyll)
+next.config.mjs        static export config (basePath from NEXT_PUBLIC_BASE_PATH)
+.github/workflows/     build + deploy to GitHub Pages
 ```
 
 ## Commands
-- `npm run build` — build to `_site/`.
-- `npm run serve` — local dev server with live reload.
-- `npm run clean` — remove `_site/`.
+- `npm run dev` — local dev server with hot reload.
+- `npm run build` — static export to `out/`.
+- `NEXT_PUBLIC_BASE_PATH=/guia-do-nomade npm run build` — build exactly as CI does, to test
+  subpath-relative links locally.
 
-Deploys happen automatically via GitHub Actions on push to `main`. `_site/` is not committed.
+Deploys happen automatically via GitHub Actions on push to `main`. `out/` and `.next/` are not
+committed.

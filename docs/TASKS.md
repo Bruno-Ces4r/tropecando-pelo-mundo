@@ -5,14 +5,15 @@ until the previous one is done and reviewed.
 
 ## Phase 0 — Project Base
 - [x] **0.1 Scaffold repo structure**
-  Acceptance: repo has `docs/` (project docs), an Eleventy project (source content + templates),
+  Acceptance: repo has `docs/` (project docs), a Next.js project (App Router, TypeScript),
   `.gitignore`, `CLAUDE.md`, initial commit made.
-- [x] **0.2 Eleventy base config + i18n skeleton**
-  Acceptance: `npm run build` produces a working `_site` with one page in PT and its EN
-  equivalent, using the `/pt/...` and `/en/...` URL structure, sharing one template.
+- [x] **0.2 Next.js static export + i18n skeleton**
+  Acceptance: `npm run build` produces a static `out/` with a PT page and its EN equivalent under
+  `/pt` and `/en`, sharing components, with a working language switch and root redirect to the
+  default language.
 - [x] **0.3 GitHub Actions build+deploy workflow**
-  Acceptance: pushing to `main` automatically builds and publishes to GitHub Pages, no manual
-  build step required.
+  Acceptance: pushing to `main` automatically builds (static export) and publishes to GitHub
+  Pages, no manual build step required.
 
 ## Phase 1 — Content Structure (ship the skeleton first)
 - [ ] **1.1 Home page shell (PT + EN)**

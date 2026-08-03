@@ -5,13 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Permissions needed for GitHub Pages deployment.
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment; don't cancel in-progress production deploys.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -26,11 +24,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # On a project site served from /<repo>/, pass the path prefix so links resolve.
-      - run: npx @11ty/eleventy --pathprefix=/guia-do-nomade/
+      - run: npm run build
+        env:
+          # Project site is served from /<repo>/. Update if the repo is renamed.
+          NEXT_PUBLIC_BASE_PATH: /guia-do-nomade
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: out
 
   deploy:
     needs: build
