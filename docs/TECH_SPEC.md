@@ -1,4 +1,4 @@
-# Technical Spec — Guia do Nômade
+# Technical Spec — Bruno Tropeçando pelo Mundo
 
 ## Stack Decision
 

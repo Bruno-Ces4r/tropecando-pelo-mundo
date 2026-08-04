@@ -1,8 +1,8 @@
 {
-  "name": "guia-do-nomade",
+  "name": "tropecando-pelo-mundo",
   "version": "1.0.0",
   "private": true,
-  "description": "Guia do Nômade — companion site for the travel channel. Next.js static export, i18n (PT/EN), free to host on GitHub Pages.",
+  "description": "Bruno Tropeçando pelo Mundo — companion site for the travel channel. Next.js static export, i18n (PT/EN), free to host on GitHub Pages.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

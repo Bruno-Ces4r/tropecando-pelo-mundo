@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Guia do Nômade",
+  title: "Bruno Tropeçando pelo Mundo",
   description: "Guias de viagem econômica por país e cidade.",
 };
 

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 // GitHub Pages project sites are served from /<repo>/. In CI we set
-// NEXT_PUBLIC_BASE_PATH=/guia-do-nomade so links and assets resolve; locally it's empty.
+// NEXT_PUBLIC_BASE_PATH=/tropecando-pelo-mundo so links and assets resolve; locally it's empty.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig = {

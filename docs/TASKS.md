@@ -1,4 +1,4 @@
-# TASKS — Guia do Nômade
+# TASKS — Bruno Tropeçando pelo Mundo
 
 Small, sequential slices. Each task should be shippable/testable on its own. Don't start a task
 until the previous one is done and reviewed.

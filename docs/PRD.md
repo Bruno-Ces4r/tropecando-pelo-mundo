@@ -1,4 +1,4 @@
-# PRD — Guia do Nômade
+# PRD — Bruno Tropeçando pelo Mundo
 
 ## Problem
 Bruno produces travel research, photos, and local tips for every destination as part of his YouTube

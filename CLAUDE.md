@@ -1,5 +1,9 @@
 # CLAUDE.md — working agreement
 
+> Skills live in `<repo>/.claude/skills/` (root) and their descriptions are already
+> auto-loaded — not repeated here. Invoke the skill when the task calls for it; it brings the
+> step-by-step.
+
 ## Source of truth
 `docs/` is the source of truth for this project. Before making changes, consult:
 - `docs/PRD.md` — product requirements (problem, goals, non-goals, monetization).
@@ -30,6 +34,8 @@ don't silently diverge from them.
 - **Static export only.** `next.config.mjs` sets `output: 'export'` — avoid APIs that require a
   Node server (route handlers doing server-side work, `next/image` optimization, etc.) unless
   we've explicitly decided to move off static export.
+- **Commits:** plain imperative English summary, no type/scope prefix (skill `commit`) —
+  **never** Claude/Anthropic as author/co-author.
 
 ## Project layout
 ```
@@ -51,7 +57,7 @@ next.config.mjs        static export config (basePath from NEXT_PUBLIC_BASE_PATH
 ## Commands
 - `npm run dev` — local dev server with hot reload.
 - `npm run build` — static export to `out/`.
-- `NEXT_PUBLIC_BASE_PATH=/guia-do-nomade npm run build` — build exactly as CI does, to test
+- `NEXT_PUBLIC_BASE_PATH=/tropecando-pelo-mundo npm run build` — build exactly as CI does, to test
   subpath-relative links locally.
 
 Deploys happen automatically via GitHub Actions on push to `main`. `out/` and `.next/` are not

@@ -11,7 +11,7 @@ export default function RootRedirect() {
     <>
       <meta httpEquiv="refresh" content={`0; url=${target}`} />
       <p style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
-        <a href={target}>Guia do Nômade</a>
+        <a href={target}>Bruno Tropeçando pelo Mundo</a>
       </p>
     </>
   );

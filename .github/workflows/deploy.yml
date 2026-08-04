@@ -27,7 +27,7 @@ jobs:
       - run: npm run build
         env:
           # Project site is served from /<repo>/. Update if the repo is renamed.
-          NEXT_PUBLIC_BASE_PATH: /guia-do-nomade
+          NEXT_PUBLIC_BASE_PATH: /tropecando-pelo-mundo
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
